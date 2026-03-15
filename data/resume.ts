@@ -2,7 +2,7 @@
 
 export const profile = {
   name: "정준영",
-  nameEn: "Jung Junyoung",
+  nameEn: "Jeong Junyoung",
   role: "Frontend Engineer",
   eyebrow: "// Frontend Engineer",
   headline: {
@@ -33,7 +33,7 @@ export const profile = {
   },
   contact: {
     email: "fdjy0101@naver.com",
-    github: "https://github.com/junic2392",
+    github: "https://github.com/junic2391",
   },
 };
 
