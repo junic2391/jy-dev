@@ -1,1 +1,75 @@
 @import "tailwindcss";
+
+:root {
+  /* 배경 계층 */
+  --bg: #0F172A;
+  --bg-card: #1A2744;
+  --bg-elevated: #1E2D4A;
+  --bg-border: rgba(255, 255, 255, 0.06);
+
+  /* Accent */
+  --accent: #38BDF8;
+  --accent-hover: #7DD3FC;
+  --accent-bg: rgba(56, 189, 248, 0.10);
+  --accent-border: rgba(56, 189, 248, 0.20);
+  --accent-2: #34D399;
+  --accent-2-bg: rgba(52, 211, 153, 0.10);
+
+  /* 텍스트 계층 */
+  --text-primary: #F1F5F9;
+  --text-secondary: #CBD5E1;
+  --text-muted: #64748B;
+  --text-faint: #334155;
+
+  /* Glass 전용 */
+  --glass-bg: rgba(26, 39, 68, 0.70);
+  --glass-border: rgba(56, 189, 248, 0.12);
+
+  /* 폰트 */
+  --font-sans: "Pretendard Variable", Pretendard, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* 반경 */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glass 유틸리티 */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+}
+
+.glass-card:hover {
+  border-color: rgba(56, 189, 248, 0.30);
+}
+
+/* 모션 감소 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
