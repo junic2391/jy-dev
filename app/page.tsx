@@ -1,12 +1,14 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import About from "@/components/About";
 
 export default function Home() {
   return (
     <>
       <Nav />
-      <main style={{ paddingTop: "60px" }}>
+      <main className="pt-[60px]">
         <Hero />
+        <About />
       </main>
     </>
   );

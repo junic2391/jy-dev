@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { profile } from "@/data/resume";
+import { drawerVariants } from "@/lib/motion";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -44,49 +46,25 @@ export default function Nav() {
   return (
     <>
       <nav
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          background: "rgba(15,23,42,0.80)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderBottom: `1px solid rgba(56,189,248,${scrolled ? 0.15 : 0.08})`,
-          transition: "border-color 0.3s ease",
-        }}
+        className={`fixed top-0 left-0 right-0 z-100 nav-bar transition-[border-color] duration-300${scrolled ? " nav-bar--scrolled" : ""}`}
       >
-        <div
-          style={{
-            maxWidth: "1080px",
-            margin: "0 auto",
-            padding: "0 24px",
-            height: "60px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
+        <div className="max-w-[1080px] mx-auto px-6 h-[60px] flex items-center justify-between">
           {/* 로고 */}
           <a
             href="#"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "13px",
-              fontWeight: 600,
-              color: "var(--accent)",
-              textDecoration: "none",
-              letterSpacing: "0.04em",
-            }}
+            className="font-mono text-[13px] font-semibold text-accent no-underline tracking-[0.04em]"
           >
             {profile.nameEn}
           </a>
 
           {/* 데스크탑 링크 */}
-          <div className="nav-desktop-links">
+          <div className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className="nav-link">
+              <a
+                key={link.href}
+                href={link.href}
+                className="font-mono text-xs text-text-secondary no-underline tracking-[0.06em] hover:text-accent transition-colors duration-150"
+              >
                 {link.label}
               </a>
             ))}
@@ -94,8 +72,8 @@ export default function Nav() {
               href={profile.contact.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="nav-github"
               aria-label="GitHub"
+              className="flex items-center text-text-secondary hover:text-accent hover:-translate-y-0.5 transition-[color,transform] duration-150 no-underline"
             >
               <GitHubIcon />
             </a>
@@ -103,42 +81,63 @@ export default function Nav() {
 
           {/* 햄버거 버튼 (모바일) */}
           <button
-            className="nav-hamburger"
+            className="md:hidden flex flex-col gap-[5px] bg-transparent border-0 cursor-pointer p-2"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="메뉴 열기"
           >
-            <span style={{ transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none" }} />
-            <span style={{ opacity: menuOpen ? 0 : 1 }} />
-            <span style={{ transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none" }} />
+            <motion.span
+              className="block w-[22px] h-[2px] bg-text-primary rounded-sm"
+              animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }}
+              transition={{ duration: 0.2 }}
+            />
+            <motion.span
+              className="block w-[22px] h-[2px] bg-text-primary rounded-sm"
+              animate={{ opacity: menuOpen ? 0 : 1 }}
+              transition={{ duration: 0.2 }}
+            />
+            <motion.span
+              className="block w-[22px] h-[2px] bg-text-primary rounded-sm"
+              animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7 : 0 }}
+              transition={{ duration: 0.2 }}
+            />
           </button>
         </div>
       </nav>
 
       {/* 모바일 드로어 */}
-      {menuOpen && (
-        <div className="nav-drawer" onClick={closeMenu}>
-          {NAV_LINKS.map((link) => (
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="fixed inset-0 z-99 flex flex-col items-center justify-center gap-10 nav-drawer"
+            variants={drawerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            onClick={closeMenu}
+          >
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="font-mono text-xl font-semibold text-text-primary no-underline tracking-[0.06em] hover:text-accent transition-colors duration-150"
+                onClick={closeMenu}
+              >
+                {link.label}
+              </a>
+            ))}
             <a
-              key={link.href}
-              href={link.href}
-              className="nav-drawer-link"
+              href={profile.contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="mt-2 flex items-center text-text-primary hover:text-accent transition-colors duration-150 no-underline"
               onClick={closeMenu}
             >
-              {link.label}
+              <GitHubIcon />
             </a>
-          ))}
-          <a
-            href={profile.contact.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-github"
-            onClick={closeMenu}
-            aria-label="GitHub"
-          >
-            <GitHubIcon />
-          </a>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

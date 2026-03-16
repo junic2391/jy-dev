@@ -1,21 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { useRef } from "react";
+import { motion } from "framer-motion";
 import { profile } from "@/data/resume";
-
-function countUp(el: HTMLElement, target: number, duration = 1200) {
-  const start = performance.now();
-  const tick = (now: number) => {
-    const progress = Math.min((now - start) / duration, 1);
-    el.textContent = String(Math.round(progress * target));
-    if (progress < 1) requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-}
-
-function parseTarget(value: string): number {
-  return parseInt(value.replace(/\D/g, ""), 10) || 0;
-}
+import { staggerContainer, staggerItem } from "@/lib/motion";
+import { useCountUp } from "@/lib/useCountUp";
 
 const STATE_COLOR: Record<string, string> = {
   active: "#34D399",
@@ -23,141 +12,144 @@ const STATE_COLOR: Record<string, string> = {
   building: "#F59E0B",
 };
 
-export default function Hero() {
-  const statRefs = useRef<(HTMLElement | null)[]>([]);
-  const observed = useRef(false);
-
-  useEffect(() => {
-    const targets = profile.stats.map((s) => parseTarget(s.value));
-    const container = statRefs.current[0]?.closest(".hero-stats");
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !observed.current) {
-          observed.current = true;
-          statRefs.current.forEach((el, i) => {
-            if (el && targets[i]) countUp(el, targets[i]);
-          });
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(container);
-    return () => observer.disconnect();
-  }, []);
+function StatItem({ value, label }: { value: string; label: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const target = parseInt(value.replace(/\D/g, ""), 10) || 0;
+  const suffix = value.replace(/\d/g, "");
+  const count = useCountUp(target, ref);
 
   return (
-    <section
-      id="hero"
-      style={{
-        minHeight: "100svh",
-        display: "flex",
-        alignItems: "center",
-        padding: "112px 24px",
-      }}
-    >
-      <div style={{ maxWidth: "1080px", margin: "0 auto", width: "100%" }}>
-        <div className="hero-grid">
+    <div className="flex flex-col gap-1">
+      <span className="font-mono text-[clamp(32px,4vw,48px)] font-bold text-accent leading-none">
+        <motion.span ref={ref}>{count}</motion.span>
+        {suffix}
+      </span>
+      <span className="font-mono text-[10px] text-text-muted tracking-[0.12em] uppercase">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+export default function Hero() {
+  return (
+    <section id="hero" className="min-h-svh flex items-center py-28 px-6">
+      <div className="max-w-[1080px] mx-auto w-full">
+        <div className="grid grid-cols-1 gap-16 items-center lg:grid-cols-[1fr_420px]">
+
           {/* 좌측 — 헤드라인 */}
-          <div className="hero-left">
-            <span className="hero-eyebrow fade-up" style={{ animationDelay: "0s" }}>
+          <motion.div
+            className="flex flex-col gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.span
+              variants={staggerItem}
+              className="font-mono text-xs text-accent uppercase tracking-[0.1em]"
+            >
               {profile.eyebrow}
-            </span>
+            </motion.span>
 
-            <h1 className="hero-h1">
-              <span className="fade-up" style={{ animationDelay: "0.1s", display: "block" }}>
-                {profile.headline.line1}
-              </span>
-              <span className="fade-up" style={{ animationDelay: "0.18s", display: "block" }}>
-                {profile.headline.line2}
-              </span>
-            </h1>
+            <motion.h1
+              variants={staggerItem}
+              className="text-[clamp(36px,5.5vw,64px)] font-bold text-text-primary leading-[1.15] tracking-[-0.02em]"
+            >
+              {profile.headline.line1}
+              <br />
+              {profile.headline.line2}
+            </motion.h1>
 
-            <p className="hero-sub fade-up" style={{ animationDelay: "0.28s" }}>
+            <motion.p
+              variants={staggerItem}
+              className="text-base text-text-secondary leading-[1.7] max-w-[520px]"
+            >
               {profile.sub}
-            </p>
+            </motion.p>
 
             {/* Stats */}
-            <div className="hero-stats fade-up" style={{ animationDelay: "0.38s" }}>
-              {profile.stats.map((stat, i) => (
-                <div key={stat.label} className="hero-stat">
-                  <span className="hero-stat-value">
-                    <span ref={(el) => { statRefs.current[i] = el; }}>
-                      {parseTarget(stat.value)}
-                    </span>
-                    {stat.value.replace(/\d/g, "")}
-                  </span>
-                  <span className="hero-stat-label">{stat.label}</span>
-                </div>
+            <motion.div variants={staggerItem} className="flex gap-10">
+              {profile.stats.map((stat) => (
+                <StatItem key={stat.label} value={stat.value} label={stat.label} />
               ))}
-            </div>
+            </motion.div>
 
             {/* CTA */}
-            <div className="hero-cta fade-up" style={{ animationDelay: "0.48s" }}>
-              <a href="#experience" className="btn-primary">
-                경력 보기
-              </a>
-              <a href="#projects" className="btn-secondary">
-                프로젝트 보기
-              </a>
-            </div>
-          </div>
+            <motion.div variants={staggerItem} className="flex gap-3 flex-wrap">
+              <a href="#experience" className="btn-primary">경력 보기</a>
+              <a href="#projects" className="btn-secondary">프로젝트 보기</a>
+            </motion.div>
+          </motion.div>
 
           {/* 우측 — Dashboard Panel */}
-          <div className="hero-right fade-up" style={{ animationDelay: "0.5s" }}>
-            <div className="dashboard-panel glass-card">
+          <motion.div
+            className="flex justify-end max-lg:justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <div className="glass-card w-full max-lg:max-w-[480px] rounded-[20px] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)]">
+
               {/* 패널 헤더 */}
-              <div className="dashboard-header">
-                <div className="dashboard-dots">
-                  <span style={{ background: "#FF5F57" }} />
-                  <span style={{ background: "#FEBC2E" }} />
-                  <span style={{ background: "#28C840" }} />
+              <div className="flex items-center gap-2.5 mb-5">
+                <div className="flex gap-1.5">
+                  <span className="block w-2.5 h-2.5 rounded-full macos-dot-close" />
+                  <span className="block w-2.5 h-2.5 rounded-full macos-dot-minimize" />
+                  <span className="block w-2.5 h-2.5 rounded-full macos-dot-maximize" />
                 </div>
-                <span className="dashboard-title">dashboard.tsx</span>
+                <span className="font-mono text-[11px] text-text-muted tracking-[0.04em]">
+                  dashboard.tsx
+                </span>
               </div>
 
               {/* Metrics */}
-              <div className="dashboard-metrics">
+              <div className="grid grid-cols-3 gap-3">
                 {profile.dashboard.metrics.map((m) => (
-                  <div key={m.label} className="dashboard-metric">
-                    <span className="dashboard-metric-value">{m.value}</span>
-                    <span className="dashboard-metric-label">{m.label}</span>
+                  <div
+                    key={m.label}
+                    className="flex flex-col gap-1 rounded-md p-3 metric-card"
+                  >
+                    <span className="font-mono text-lg font-bold text-accent">{m.value}</span>
+                    <span className="font-mono text-[10px] text-text-muted tracking-[0.06em] whitespace-nowrap">
+                      {m.label}
+                    </span>
                   </div>
                 ))}
               </div>
 
               {/* 구분선 */}
-              <div style={{ height: "1px", background: "var(--bg-border)", margin: "16px 0" }} />
+              <div className="my-4 divider" />
 
               {/* Status */}
-              <div className="dashboard-status-list">
+              <div className="flex flex-col gap-2.5">
                 {profile.dashboard.status.map((s) => (
-                  <div key={s.label} className="dashboard-status-item">
+                  <div key={s.label} className="flex items-center gap-2.5">
                     <span
-                      className="dashboard-status-dot"
-                      style={{ background: STATE_COLOR[s.state] }}
+                      className="w-2 h-2 rounded-full shrink-0 status-dot"
+                      style={{ '--state-color': STATE_COLOR[s.state] } as React.CSSProperties}
                     />
-                    <span className="dashboard-status-label">{s.label}</span>
+                    <span className="font-mono text-xs text-text-secondary">{s.label}</span>
                   </div>
                 ))}
               </div>
 
               {/* 구분선 */}
-              <div style={{ height: "1px", background: "var(--bg-border)", margin: "16px 0" }} />
+              <div className="my-4 divider" />
 
               {/* Summary */}
-              <div className="dashboard-summary">
+              <div className="flex gap-2 flex-wrap">
                 {profile.dashboard.summary.map((s) => (
-                  <span key={s.label} className="dashboard-summary-tag">
+                  <span
+                    key={s.label}
+                    className="font-mono text-[10px] text-accent-2 rounded-sm px-2 py-0.5 tracking-[0.04em] badge-accent2"
+                  >
                     {s.label}
                   </span>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
+
         </div>
       </div>
     </section>
