@@ -71,6 +71,7 @@ export interface ContributionItem {
 export interface ExperienceEntry {
   id: string;
   title: string;
+  company?: string;
   period: string;
   context: string;
   scope: string;
@@ -82,6 +83,7 @@ export const experience: ExperienceEntry[] = [
   {
     id: "saas-cms",
     title: "SaaS CMS 플랫폼",
+    company: "서울시스템(주)",
     period: "2021.12 — 2024.09",
     context: "15개 이상 클라이언트에 납품된 멀티테넌트 SaaS CMS 플랫폼",
     scope: "프론트엔드 개발 · 아키텍처 설계 · 공통 컴포넌트 시스템 구축",
@@ -96,7 +98,7 @@ export const experience: ExperienceEntry[] = [
       },
       {
         label: "실시간 추상화",
-        detail: "SockJS + StompJS 기반 WebSocket 레이어를 커스텀 훅으로 추상화, 기사 ID 단위 토픽 구독으로 불필요한 렌더링 제거",
+        detail: "기사 잠금·상태 동기화·외부 기사 수신·알림 등 5개 채널 그룹과 44개 이상 이벤트 타입을 분류, 컴포넌트는 채널명만 선언하면 구독·해제가 자동화되는 커스텀 훅 추상화",
       },
       {
         label: "렌더링 전략 재설계",
@@ -106,12 +108,21 @@ export const experience: ExperienceEntry[] = [
         label: "i18n 아키텍처",
         detail: "텍스트 리소스를 JSON 파일로 완전 분리, 코드 배포 없이 언어팩 교체만으로 현지화 반영 가능한 구조 확립",
       },
+      {
+        label: "XML 기사 미리보기",
+        detail: "기사 콘텐츠(글·이미지·동영상·차트·표 등 15가지 유형)를 XML에서 파싱해 React 화면에 실시간 렌더링하는 파서 모듈을 직접 개발, 출고 전 오탈자·레이아웃 확인 워크플로우 지원",
+      },
+      {
+        label: "Keycloak SSO 통합",
+        detail: "Keycloak SSO를 도입해 10개 이상 클라이언트에 동일한 로그인 체계 적용, 토큰 갱신·세션 관리를 서비스 로직과 분리해 클라이언트별 인증 코드 중복 제거",
+      },
     ],
     techTags: ["React", "TypeScript", "Next.js", "MobX", "WebSocket", "SockJS", "StompJS", "i18n"],
   },
   {
     id: "backoffice-rebuild",
     title: "백오피스 & 모바일 리빌딩",
+    company: "서울시스템(주)",
     period: "2020.08 — 2021.02",
     context: "중앙일보 백오피스 및 모바일 웹 전면 리빌딩",
     scope: "프론트엔드 개발 · 레거시 마이그레이션 · 비동기 아키텍처 정비",
@@ -138,7 +149,7 @@ export const experience: ExperienceEntry[] = [
 export interface DecisionItem {
   choice: string;
   reason: string;
-  tradeoff: string;
+  tradeoff?: string;
 }
 
 export interface ProjectData {
@@ -189,24 +200,26 @@ export const projects: ProjectData[] = [
     techTags: ["React", "TypeScript", "Next.js", "MobX", "WebSocket", "SockJS"],
   },
   {
-    id: "maju",
+    id: "wms-rebuild",
     index: "02",
-    title: "MAJU — 보이스 매칭 소셜",
-    problem: "도트 그래픽 기반 보이스 매칭 소셜 서비스를 1인 기획·설계·개발로 처음부터 구축. 빠른 실험과 최소 인프라 비용이 핵심 제약이었습니다.",
-    results: ["1인 풀스택 개발", "React Native", "Supabase BaaS"],
+    title: "중앙일보 WMS 백오피스 리빌딩",
+    problem: "레거시 애플리케이션을 React로 전환하며, 기사 작성 후 웹 출고·뉴스레터·SNS·Push를 각각 다른 시스템에서 처리하던 워크플로우를 단일 백오피스로 통합해야 했습니다.",
+    results: ["React 전환 완료", "Redux-Saga 비동기 통합", "Froala 뉴스레터 편집기", "SNS 연동(FB/IG)", "Push 자동/수동 발송"],
     decisions: [
       {
-        choice: "React Native (Expo) 선택",
-        reason: "Web 개발 경험을 최대한 활용해 iOS/Android 동시 대응, 빠른 프로토타이핑 가능",
-        tradeoff: "Flutter — 성능은 우수하나 Dart 학습 곡선과 팀 단독 개발 리스크",
+        choice: "Redux-Saga로 비동기 흐름 분리",
+        reason: "여러 발송 채널(Push·SNS·뉴스레터)의 비동기 로직이 컴포넌트에 분산되어 있어, Saga 레이어로 집중해 API 연동 흐름을 추적 가능한 구조로 정리",
       },
       {
-        choice: "Supabase BaaS 도입",
-        reason: "Auth, Realtime, Storage를 단일 서비스로 해결, 백엔드 인프라 구축·운영 비용 제거",
-        tradeoff: "Custom Node.js 서버 — 유연성은 높으나 1인 운영 환경에서 오버엔지니어링 판단",
+        choice: "Froala Editor로 뉴스레터 편집기 구현",
+        reason: "기자가 HTML 뉴스레터를 WYSIWYG 방식으로 작성할 수 있도록 Froala 커스텀 플러그인 적용, 발송 전 미리보기 기능 연동",
+      },
+      {
+        choice: "Highcharts + Full Calendar로 대시보드·일정 통합",
+        reason: "기사 통계 시계열 차트와 발송 일정 시각화를 하나의 화면에서 제공, 반응형 차트 필터로 기간별 데이터 분석 지원",
       },
     ],
-    techTags: ["React Native", "Expo", "Supabase", "TypeScript"],
+    techTags: ["React", "Redux-Saga", "Highcharts", "Froala Editor", "Full Calendar", "JavaScript"],
   },
 ];
 
