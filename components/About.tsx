@@ -7,7 +7,7 @@ import { staggerContainer, staggerItem, VIEWPORT } from "@/lib/motion";
 
 export default function About() {
   return (
-    <section id="about" className="py-28 px-6">
+    <section id="about" className="py-10 px-6">
       <div className="max-w-[1080px] mx-auto">
         <SectionHeader eyebrow={about.eyebrow} heading={about.heading} />
 
@@ -22,7 +22,7 @@ export default function About() {
             <motion.div
               key={card.title}
               variants={staggerItem}
-              className="glass-card p-8 flex flex-col gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.5),0_0_20px_rgba(56,189,248,0.08)] transition-shadow duration-200"
+              className="glass-card p-8 flex flex-col gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.5),0_0_20px_rgba(57,211,83,0.08)] transition-shadow duration-200"
             >
               <span className="text-[28px] leading-none">{card.icon}</span>
               <h3 className="text-lg font-semibold text-text-primary leading-snug">{card.title}</h3>

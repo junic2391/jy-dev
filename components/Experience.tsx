@@ -7,7 +7,7 @@ import { staggerContainer, staggerItem, VIEWPORT } from "@/lib/motion";
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-28 px-6">
+    <section id="experience" className="py-10 px-6">
       <div className="max-w-[1080px] mx-auto">
         <SectionHeader eyebrow="// Experience" heading="주요 경력" />
 
@@ -21,7 +21,7 @@ export default function Experience() {
           {/* 세로 타임라인 선 */}
           <div
             aria-hidden
-            className="absolute left-[7px] inset-y-0 w-px bg-linear-to-b from-transparent via-[rgba(56,189,248,0.25)] to-transparent"
+            className="absolute left-[7px] inset-y-0 w-px bg-linear-to-b from-transparent via-[rgba(57,211,83,0.25)] to-transparent"
           />
 
           <div className="flex flex-col">
@@ -33,7 +33,7 @@ export default function Experience() {
               >
                 {/* 타임라인 점 */}
                 <div className="shrink-0 pt-[3px] z-10">
-                  <div className="w-4 h-4 rounded-full bg-accent ring-2 ring-accent/20 ring-offset-2 ring-offset-bg shadow-[0_0_10px_2px_rgba(56,189,248,0.35)]" />
+                  <div className="w-4 h-4 rounded-full bg-accent ring-2 ring-accent/20 ring-offset-2 ring-offset-bg shadow-[0_0_10px_2px_rgba(57,211,83,0.35)]" />
                 </div>
 
                 {/* 카드 */}
@@ -59,7 +59,7 @@ export default function Experience() {
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="flex flex-col gap-1">
                       <span className="font-mono text-[11px] text-accent uppercase tracking-widest">
-                        CONTEXT
+                        배경
                       </span>
                       <p className="text-sm text-text-secondary leading-relaxed">
                         {entry.context}
@@ -67,7 +67,7 @@ export default function Experience() {
                     </div>
                     <div className="flex flex-col gap-1">
                       <span className="font-mono text-[11px] text-accent uppercase tracking-widest">
-                        SCOPE
+                        담당 범위
                       </span>
                       <p className="text-sm text-text-secondary leading-relaxed">
                         {entry.scope}
@@ -78,15 +78,15 @@ export default function Experience() {
                   {/* CONTRIBUTION */}
                   <div className="flex flex-col gap-2">
                     <span className="font-mono text-[11px] text-accent uppercase tracking-widest">
-                      CONTRIBUTION
+                      기여 내용
                     </span>
-                    <ul className="flex flex-col gap-2">
+                    <ul className="grid gap-2">
                       {entry.contributions.map((item) => (
                         <li
                           key={item.label}
-                          className="flex gap-2 text-sm leading-relaxed"
+                          className="grid grid-cols-1 sm:grid-cols-[9rem_1fr] gap-0.5 sm:gap-2 text-sm leading-relaxed"
                         >
-                          <span className="font-semibold text-accent shrink-0">
+                          <span className="font-semibold text-accent">
                             {item.label}
                           </span>
                           <span className="text-text-secondary">
