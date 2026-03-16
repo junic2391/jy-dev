@@ -84,7 +84,7 @@ export const experience: ExperienceEntry[] = [
     title: "SaaS CMS 플랫폼",
     period: "2021.12 — 2024.09",
     context: "15개 이상 클라이언트에 납품된 멀티테넌트 SaaS CMS 플랫폼",
-    scope: "프론트엔드 리드 · 아키텍처 설계 · 공통 컴포넌트 시스템 구축",
+    scope: "프론트엔드 개발 · 아키텍처 설계 · 공통 컴포넌트 시스템 구축",
     contributions: [
       {
         label: "공통 컴포넌트 시스템",
@@ -113,7 +113,7 @@ export const experience: ExperienceEntry[] = [
     id: "backoffice-rebuild",
     title: "백오피스 & 모바일 리빌딩",
     period: "2020.08 — 2021.02",
-    context: "대형 미디어 기업 백오피스 및 모바일 웹 전면 리빌딩",
+    context: "중앙일보 백오피스 및 모바일 웹 전면 리빌딩",
     scope: "프론트엔드 개발 · 레거시 마이그레이션 · 비동기 아키텍처 정비",
     contributions: [
       {
