@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { profile } from "@/data/resume";
 import { drawerVariants } from "@/lib/motion";
+import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -68,15 +69,18 @@ export default function Nav() {
                 {link.label}
               </a>
             ))}
-            <a
-              href={profile.contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="flex items-center text-text-secondary hover:text-accent hover:-translate-y-0.5 transition-[color,transform] duration-150 no-underline"
-            >
-              <GitHubIcon />
-            </a>
+            <div className="flex items-center gap-4">
+              <ThemeToggle />
+              <a
+                href={profile.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="flex items-center text-text-secondary hover:text-accent hover:-translate-y-0.5 transition-[color,transform] duration-150 no-underline"
+              >
+                <GitHubIcon />
+              </a>
+            </div>
           </div>
 
           {/* 햄버거 버튼 (모바일) */}
@@ -125,16 +129,19 @@ export default function Nav() {
                 {link.label}
               </a>
             ))}
-            <a
-              href={profile.contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="mt-2 flex items-center text-text-primary hover:text-accent transition-colors duration-150 no-underline"
-              onClick={closeMenu}
-            >
-              <GitHubIcon />
-            </a>
+            <div className="flex items-center gap-4 mt-2">
+              <ThemeToggle />
+              <a
+                href={profile.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="flex items-center text-text-primary hover:text-accent transition-colors duration-150 no-underline"
+                onClick={closeMenu}
+              >
+                <GitHubIcon />
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
