@@ -5,13 +5,11 @@ export const profile = {
   nameEn: "Jeong Junyoung",
   role: "Frontend Engineer",
   eyebrow: "// Frontend Engineer",
-  headline: {
-    line1: "복잡한 문제를 단순한 경험으로 —",
-    line2: "프론트엔드로 해결합니다.",
-  },
-  sub: "실시간 협업, 멀티테넌트 SaaS, 퍼포먼스 최적화 — 4년간 15개 이상의 클라이언트에 납품된 제품을 프론트엔드로 이끌었습니다.",
+  headline: "안녕하세요 프론트엔드 개발자 정준영입니다.",
+  sub1: "좋은 코드는 다음 사람을 위한 배려라고 생각합니다.",
+  sub2: "4년간 그 배려를 SaaS와 미디어 플랫폼에 쌓아왔습니다.",
   stats: [
-    { value: "4", label: "YEARS" },
+    { value: "4+", label: "YEARS" },
     { value: "15+", label: "CLIENTS" },
     { value: "2", label: "PRODUCTS" },
   ],
@@ -123,7 +121,7 @@ export const experience: ExperienceEntry[] = [
     id: "backoffice-rebuild",
     title: "백오피스 & 모바일 리빌딩",
     company: "서울시스템(주)",
-    period: "2020.08 — 2021.02",
+    period: "2020.08 — 2021.12",
     context: "중앙일보 백오피스 및 모바일 웹 전면 리빌딩",
     scope: "프론트엔드 개발 · 레거시 마이그레이션 · 비동기 아키텍처 정비",
     contributions: [

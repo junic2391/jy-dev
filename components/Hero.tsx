@@ -5,10 +5,11 @@ import { motion } from "framer-motion";
 import { profile } from "@/data/resume";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 import { useCountUp } from "@/lib/useCountUp";
+import { useTypewriter } from "@/lib/useTypewriter";
 
 const STATE_COLOR: Record<string, string> = {
-  active: "#34D399",
-  ready: "#38BDF8",
+  active:   "#39D353",
+  ready:    "#86EFAC",
   building: "#F59E0B",
 };
 
@@ -32,8 +33,12 @@ function StatItem({ value, label }: { value: string; label: string }) {
 }
 
 export default function Hero() {
+  const { displayed: line1, done: line1Done } = useTypewriter(profile.headline, 50, 400);
+  const { displayed: line2, done: line2Done } = useTypewriter(profile.sub1, 30, 100, line1Done);
+  const { displayed: line3 }                  = useTypewriter(profile.sub2,  30, 100, line2Done);
+
   return (
-    <section id="hero" className="min-h-svh flex items-center py-28 px-6">
+    <section id="hero" className="min-h-svh flex items-center py-10 px-6">
       <div className="max-w-[1080px] mx-auto w-full">
         <div className="grid grid-cols-1 gap-16 items-center lg:grid-cols-[1fr_420px]">
 
@@ -51,21 +56,52 @@ export default function Hero() {
               {profile.eyebrow}
             </motion.span>
 
-            <motion.h1
-              variants={staggerItem}
-              className="text-[clamp(36px,5.5vw,64px)] font-bold text-text-primary leading-[1.15] tracking-[-0.02em]"
-            >
-              {profile.headline.line1}
-              <br />
-              {profile.headline.line2}
-            </motion.h1>
-
-            <motion.p
-              variants={staggerItem}
-              className="text-base text-text-secondary leading-[1.7] max-w-[520px]"
-            >
-              {profile.sub}
-            </motion.p>
+            <motion.div variants={staggerItem}>
+              <div className="font-mono rounded-lg overflow-hidden border border-(--terminal-border) bg-(--terminal-bg)">
+                {/* 콘솔 상단 바 */}
+                <div className="flex items-center justify-between px-4 py-2.5 border-b border-(--terminal-border) bg-(--terminal-header-bg)">
+                  <span className="text-[11px] text-text-secondary tracking-[0.04em]">intro.ts</span>
+                  <span className="text-[10px] text-text-faint tracking-[0.04em]">~/portfolio</span>
+                </div>
+                {/* 콘솔 본문 */}
+                <div className="px-4 py-4 flex flex-col gap-3">
+                  {/* 라인 1 — 헤드라인 */}
+                  <div className="flex items-start gap-2">
+                    <span className="text-(--terminal-prompt) text-sm mt-0.5 select-none shrink-0">{">"}</span>
+                    <h1 className="text-[clamp(18px,2.5vw,28px)] font-bold text-text-primary leading-[1.4] tracking-[-0.01em]">
+                      {line1}
+                      {!line1Done && (
+                        <span className="inline-block w-[2px] h-[1.1em] bg-(--terminal-prompt) ml-1 align-middle" />
+                      )}
+                    </h1>
+                  </div>
+                  {/* 라인 2 — sub1 */}
+                  {line1Done && (
+                    <div className="flex items-start gap-2">
+                      <span className="text-(--terminal-prompt) text-sm mt-0.5 select-none shrink-0 opacity-60">{">"}</span>
+                      <p className="text-sm text-text-primary leading-[1.7]">
+                        {line2}
+                        {!line2Done && (
+                          <span className="inline-block w-[2px] h-[0.9em] bg-(--terminal-prompt) ml-1 align-middle" />
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {/* 라인 3 — sub2 */}
+                  {line2Done && (
+                    <div className="flex items-start gap-2">
+                      <span className="text-(--terminal-prompt) text-sm mt-0.5 select-none shrink-0 opacity-40">{">"}</span>
+                      <p className="text-xs text-text-secondary leading-[1.7]">
+                        {line3}
+                        {line3 !== profile.sub2 && (
+                          <span className="inline-block w-[2px] h-[0.85em] bg-(--terminal-prompt) ml-1 align-middle opacity-60" />
+                        )}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
 
             {/* Stats */}
             <motion.div variants={staggerItem} className="flex gap-10">
@@ -88,19 +124,14 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            <div className="glass-card w-full max-lg:max-w-[480px] rounded-[20px] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)]">
+            <div className="w-full max-lg:max-w-[480px] rounded-lg overflow-hidden border border-(--terminal-border) bg-(--terminal-bg) shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
 
               {/* 패널 헤더 */}
-              <div className="flex items-center gap-2.5 mb-5">
-                <div className="flex gap-1.5">
-                  <span className="block w-2.5 h-2.5 rounded-full macos-dot-close" />
-                  <span className="block w-2.5 h-2.5 rounded-full macos-dot-minimize" />
-                  <span className="block w-2.5 h-2.5 rounded-full macos-dot-maximize" />
-                </div>
-                <span className="font-mono text-[11px] text-text-muted tracking-[0.04em]">
-                  dashboard.tsx
-                </span>
+              <div className="flex items-center justify-between px-4 py-2.5 border-b border-(--terminal-border) bg-(--terminal-header-bg)">
+                  <span className="font-mono text-[11px] text-text-secondary tracking-[0.04em]">dev.status</span>
+                  <span className="font-mono text-[10px] text-text-faint tracking-[0.04em]">dashboard.tsx</span>
               </div>
+              <div className="p-5">
 
               {/* Metrics */}
               <div className="grid grid-cols-3 gap-3">
@@ -147,6 +178,7 @@ export default function Hero() {
                   </span>
                 ))}
               </div>
+            </div>{/* p-5 */}
             </div>
           </motion.div>
 
