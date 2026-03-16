@@ -11,7 +11,7 @@ interface SectionHeaderProps {
 export default function SectionHeader({ eyebrow, heading }: SectionHeaderProps) {
   return (
     <motion.div
-      className="mb-14"
+      className="mb-6"
       variants={staggerContainer}
       initial="hidden"
       whileInView="visible"

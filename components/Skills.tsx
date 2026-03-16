@@ -6,7 +6,7 @@ import { staggerContainer, staggerItem, VIEWPORT } from "@/lib/motion";
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-28 px-6">
+    <section id="skills" className="py-10 px-6">
       <div className="max-w-[1080px] mx-auto">
         <SectionHeader eyebrow="// Skills" heading="기술 스택" />
         <motion.div

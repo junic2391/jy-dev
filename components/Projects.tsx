@@ -138,7 +138,7 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-28 px-6">
+    <section id="projects" className="py-10 px-6">
       <div className="max-w-[1080px] mx-auto">
         <SectionHeader eyebrow="// Projects" heading="주요 프로젝트" />
 
