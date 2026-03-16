@@ -247,11 +247,21 @@ export const skills: SkillCategory[] = [
   },
   {
     category: "상태관리",
-    chips: [{ name: "MobX" }, { name: "Redux" }, { name: "Redux-Saga" }],
+    chips: [
+      { name: "Zustand" },
+      { name: "TanStack Query" },
+      { name: "MobX" },
+      { name: "Redux" },
+    ],
   },
   {
     category: "스타일링",
-    chips: [{ name: "Tailwind CSS" }, { name: "CSS3" }, { name: "HTML5" }],
+    chips: [
+      { name: "Tailwind CSS" },
+      { name: "styled-components" },
+      { name: "CSS3" },
+      { name: "HTML5" },
+    ],
   },
   {
     category: "실시간",
@@ -263,7 +273,14 @@ export const skills: SkillCategory[] = [
   },
   {
     category: "도구",
-    chips: [{ name: "Git" }, { name: "GitHub" }, { name: "Figma" }, { name: "Swagger" }],
+    chips: [
+      { name: "Git" },
+      { name: "GitHub" },
+      { name: "Jira" },
+      { name: "Figma" },
+      { name: "Swagger" },
+      { name: "Postman" },
+    ],
   },
 ];
 
