@@ -46,7 +46,7 @@ export default function Hero() {
           >
             <motion.span
               variants={staggerItem}
-              className="font-mono text-xs text-accent uppercase tracking-[0.1em]"
+              className="font-mono text-xs text-accent uppercase tracking-widest"
             >
               {profile.eyebrow}
             </motion.span>

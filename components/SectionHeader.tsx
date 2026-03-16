@@ -19,7 +19,7 @@ export default function SectionHeader({ eyebrow, heading }: SectionHeaderProps) 
     >
       <motion.span
         variants={fadeUp}
-        className="font-mono text-xs text-accent uppercase tracking-[0.1em]"
+        className="font-mono text-xs text-accent uppercase tracking-widest"
       >
         {eyebrow}
       </motion.span>

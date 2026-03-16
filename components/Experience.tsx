@@ -91,11 +91,11 @@ export default function Experience() {
                   </div>
 
                   {/* Tech Tags */}
-                  <div className="flex flex-wrap gap-2 pt-2 border-t border-[(--glass-border)]">
+                  <div className="flex flex-wrap gap-2 pt-2 border-t border-(--glass-border)">
                     {entry.techTags.map((tag) => (
                       <span
                         key={tag}
-                        className="font-mono text-[11px] text-text-muted px-2 py-0.5 rounded border border-[(--glass-border)]"
+                        className="font-mono text-[11px] text-text-muted px-2 py-0.5 rounded border border-(--glass-border)"
                       >
                         {tag}
                       </span>
