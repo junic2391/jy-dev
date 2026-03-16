@@ -39,13 +39,20 @@ export default function Experience() {
                 {/* 카드 */}
                 <div className="glass-card flex-1 min-w-0 p-6 sm:p-8 flex flex-col gap-6">
                   {/* 헤더 */}
-                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                    <h3 className="text-lg font-semibold text-text-primary leading-snug">
-                      {entry.title}
-                    </h3>
-                    <span className="font-mono text-xs text-text-muted">
-                      {entry.period}
-                    </span>
+                  <div className="flex flex-col gap-1">
+                    {entry.company && (
+                      <span className="font-mono text-[11px] text-text-muted uppercase tracking-widest">
+                        {entry.company}
+                      </span>
+                    )}
+                    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                      <h3 className="text-lg font-semibold text-text-primary leading-snug">
+                        {entry.title}
+                      </h3>
+                      <span className="font-mono text-xs text-text-muted">
+                        {entry.period}
+                      </span>
+                    </div>
                   </div>
 
                   {/* CONTEXT / SCOPE */}
