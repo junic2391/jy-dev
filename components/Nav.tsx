@@ -30,11 +30,30 @@ function GitHubIcon() {
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
+  }, []);
+
+  useEffect(() => {
+    const sectionIds = NAV_LINKS.map((l) => l.href.slice(1));
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { rootMargin: "-50% 0px -50% 0px" }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   useEffect(() => {
@@ -64,7 +83,11 @@ export default function Nav() {
               <a
                 key={link.href}
                 href={link.href}
-                className="font-mono text-xs text-text-secondary no-underline tracking-[0.06em] hover:text-accent transition-colors duration-150"
+                className={`font-mono text-xs no-underline tracking-[0.06em] transition-colors duration-150 ${
+                  activeSection === link.href.slice(1)
+                    ? "text-accent"
+                    : "text-text-secondary hover:text-accent"
+                }`}
               >
                 {link.label}
               </a>
@@ -123,7 +146,11 @@ export default function Nav() {
               <a
                 key={link.href}
                 href={link.href}
-                className="font-mono text-xl font-semibold text-text-primary no-underline tracking-[0.06em] hover:text-accent transition-colors duration-150"
+                className={`font-mono text-xl font-semibold no-underline tracking-[0.06em] transition-colors duration-150 ${
+                  activeSection === link.href.slice(1)
+                    ? "text-accent"
+                    : "text-text-primary hover:text-accent"
+                }`}
                 onClick={closeMenu}
               >
                 {link.label}
