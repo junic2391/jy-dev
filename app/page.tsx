@@ -1,5 +1,5 @@
 import Nav from "@/components/Nav";
-import Hero from "@/components/Hero";
+import BentoGrid from "@/components/BentoGrid";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <Nav />
       <main className="pt-[60px]">
-        <Hero />
+        <BentoGrid />
         <About />
         <Experience />
         <Projects />
