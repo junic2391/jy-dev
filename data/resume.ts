@@ -29,9 +29,13 @@ export const profile = {
       { label: "Zero Critical Bugs" },
     ],
   },
+  location: "Seoul, KR",
   contact: {
     email: "fdjy0101@naver.com",
     github: "https://github.com/junic2391",
+  },
+  available: {
+    message: "새로운 기회에 열려 있습니다",
   },
 };
 
@@ -281,6 +285,30 @@ export const skills: SkillCategory[] = [
     ],
   },
 ];
+
+// ─── INSIGHTS ───
+
+export const insights = [
+  {
+    date: "2023. 11. 24",
+    title: "React Server Components: 실무 적용기",
+    excerpt: "새로운 데이터 페칭 패러다임이 프론트엔드 아키텍처에 가져온 변화와 성능 측정 결과에 대하여...",
+  },
+  {
+    date: "2023. 09. 12",
+    title: "웹 성능 최적화: LCP 개선 60% 달성 전략",
+    excerpt: "대규모 트래픽 환경에서 폰트, 이미지 로딩 전략을 재검토하여 얻은 인사이트를 공유합니다.",
+  },
+];
+
+// ─── FEATURED CASE STUDY ───
+
+export const featuredCaseStudy = {
+  eyebrow: "Featured Case Study",
+  title: ["SaaS CMS 플랫폼", "리빌딩"],
+  description: "멀티테넌트 환경의 복잡한 프론트엔드 아키텍처를 재설계하고 성능을 3배 개선시킨 기술적 도전기입니다.",
+  linkLabel: "READ PROCESS",
+};
 
 // ─── FOOTER ───
 

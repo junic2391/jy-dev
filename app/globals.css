@@ -1,46 +1,82 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   /* 배경 */
-  --color-bg:             #0C0F0C;
-  --color-bg-card:        #111A12;
-  --color-bg-elevated:    #162018;
-  --color-bg-border:      rgba(255, 255, 255, 0.05);
+  --color-bg:             #080808;
+  --color-bg-card:        #0e0e0e;
+  --color-bg-elevated:    #141414;
+  --color-bg-border:      rgba(255, 255, 255, 0.08);
 
-  /* Accent */
-  --color-accent:         #39D353;
-  --color-accent-hover:   #6EE681;
-  --color-accent-2:       #22C55E;
+  /* Accent — lime */
+  --color-accent:         #c8ff3c;
+  --color-accent-hover:   #d4ff6e;
+  --color-accent-2:       #a0cc2a;
 
   /* 텍스트 */
-  --color-text-primary:   #F1F5F9;
-  --color-text-secondary: #CBD5E1;
-  --color-text-muted:     #64748B;
-  --color-text-faint:     #334155;
+  --color-text-primary:   #f0f0f0;
+  --color-text-secondary: #888888;
+  --color-text-muted:     #555555;
+  --color-text-faint:     #333333;
 
   /* 폰트 */
   --font-sans: "Pretendard Variable", Pretendard, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
-  /* 반경 */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  /* 반경 — neo-brutalism: hard corners */
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
 }
 
 /* rgba 계열 — @theme에서 사용 불가 */
 :root {
-  --glass-bg:            rgba(12, 20, 13, 0.70);
-  --glass-border:        rgba(57, 211, 83, 0.12);
-  --accent-bg:           rgba(57, 211, 83, 0.08);
-  --accent-border:       rgba(57, 211, 83, 0.18);
-  --accent-2-bg:         rgba(34, 197, 94, 0.08);
-  --accent-2-border:     rgba(34, 197, 94, 0.18);
+  --glass-bg:            rgba(255, 255, 255, 0.03);
+  --glass-border:        rgba(255, 255, 255, 0.10);
+  --accent-bg:           rgba(255, 255, 255, 0.05);
+  --accent-border:       rgba(255, 255, 255, 0.10);
+  --accent-2-bg:         rgba(255, 255, 255, 0.03);
+  --accent-2-border:     rgba(255, 255, 255, 0.10);
 
-  --terminal-prompt:     #39D353;
-  --terminal-bg:         rgba(6, 10, 7, 0.95);
-  --terminal-header-bg:  rgba(9, 13, 10, 0.98);
-  --terminal-border:     rgba(57, 211, 83, 0.10);
+  --terminal-prompt:     #ffffff;
+  --terminal-bg:         rgba(10, 10, 10, 0.95);
+  --terminal-header-bg:  rgba(10, 10, 10, 0.98);
+  --terminal-border:     rgba(255, 255, 255, 0.08);
+  --background:             oklch(1 0 0);
+  --foreground:             oklch(0.145 0 0);
+  --card:             oklch(1 0 0);
+  --card-foreground:             oklch(0.145 0 0);
+  --popover:             oklch(1 0 0);
+  --popover-foreground:             oklch(0.145 0 0);
+  --primary:             oklch(0.205 0 0);
+  --primary-foreground:             oklch(0.985 0 0);
+  --secondary:             oklch(0.97 0 0);
+  --secondary-foreground:             oklch(0.205 0 0);
+  --muted:             oklch(0.97 0 0);
+  --muted-foreground:             oklch(0.556 0 0);
+  --accent:             oklch(0.97 0 0);
+  --accent-foreground:             oklch(0.205 0 0);
+  --destructive:             oklch(0.577 0.245 27.325);
+  --border:             oklch(0.922 0 0);
+  --input:             oklch(0.922 0 0);
+  --ring:             oklch(0.708 0 0);
+  --chart-1:             oklch(0.87 0 0);
+  --chart-2:             oklch(0.556 0 0);
+  --chart-3:             oklch(0.439 0 0);
+  --chart-4:             oklch(0.371 0 0);
+  --chart-5:             oklch(0.269 0 0);
+  --radius:             0.625rem;
+  --sidebar:             oklch(0.985 0 0);
+  --sidebar-foreground:             oklch(0.145 0 0);
+  --sidebar-primary:             oklch(0.205 0 0);
+  --sidebar-primary-foreground:             oklch(0.985 0 0);
+  --sidebar-accent:             oklch(0.97 0 0);
+  --sidebar-accent-foreground:             oklch(0.205 0 0);
+  --sidebar-border:             oklch(0.922 0 0);
+  --sidebar-ring:             oklch(0.708 0 0);
 }
 
 [data-theme="light"] {
@@ -133,15 +169,15 @@ body {
 
   /* Nav */
   .nav-bar {
-    background: rgba(12, 15, 12, 0.80);
+    background: rgba(10, 10, 10, 0.80);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(57, 211, 83, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
   .nav-bar--scrolled {
-    border-bottom-color: rgba(57, 211, 83, 0.15);
+    border-bottom-color: rgba(255, 255, 255, 0.10);
   }
   .nav-drawer {
-    background: rgba(12, 15, 12, 0.96);
+    background: rgba(10, 10, 10, 0.96);
     backdrop-filter: blur(20px);
   }
 
@@ -170,181 +206,213 @@ body {
   [data-theme="light"] .nav-bar--scrolled   { border-bottom-color: rgba(22, 163, 74, 0.20); }
   [data-theme="light"] .nav-drawer          { background: rgba(250, 248, 243, 0.97); }
 
-  /* ── BENTO GRID ─────────────────────────────────── */
+  /* ── NEO-BRUTALISM BENTO GRID ───────────────────── */
 
-  .bento-grid {
-    display: grid;
-    gap: 14px;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "hero"
-      "metrics"
-      "techstack"
-      "proj1"
-      "proj2";
+  /* Header */
+  .figma-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    padding: 20px 0 18px;
+    margin-bottom: 16px;
   }
 
-  @media (min-width: 768px) {
-    .bento-grid {
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas:
-        "hero      hero     "
-        "metrics   techstack"
-        "proj1     proj2    ";
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .bento-grid {
-      gap: 18px;
-      grid-template-columns: repeat(6, 1fr);
-      grid-template-rows: auto auto auto;
-      grid-template-areas:
-        "hero hero hero hero metrics   metrics  "
-        "hero hero hero hero techstack techstack"
-        "proj1 proj1 proj1  proj2 proj2 proj2   ";
-    }
-  }
-
-  .bento-hero      { grid-area: hero; }
-  .bento-metrics   { grid-area: metrics; }
-  .bento-tech      { grid-area: techstack; }
-  .bento-proj1     { grid-area: proj1; }
-  .bento-proj2     { grid-area: proj2; }
-
-  /* 기본 카드 — 글래스 */
-  .bento-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.07);
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .bento-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(57, 211, 83, 0.25);
-    box-shadow:
-      0 16px 48px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.07);
-  }
-
-  /* Metrics 카드 왼쪽 강조 보더 */
-  .bento-metrics--accent {
-    border-left: 4px solid var(--color-accent);
-  }
-
-  /* 기술 태그 칩 */
-  .bento-chip {
-    background: var(--accent-bg);
-    border: 1px solid var(--accent-border);
-    color: var(--color-text-secondary);
-    font-size: 12px;
+  .nb-header-meta {
     font-family: var(--font-mono);
-    padding: 3px 10px;
-    border-radius: var(--radius-sm);
-    white-space: nowrap;
-    transition: all 0.15s ease;
-  }
-
-  .bento-chip:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-  }
-
-  /* 프로젝트 타입 배지 */
-  .bento-badge {
-    display: inline-block;
-    background: var(--color-accent);
-    color: var(--color-bg);
     font-size: 10px;
-    font-weight: 700;
-    font-family: var(--font-mono);
-    padding: 2px 8px;
-    border-radius: 4px;
+    color: #444444;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  .figma-title {
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 900;
+    color: #f0f0f0;
+    letter-spacing: -2px;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    width: fit-content;
+    line-height: 0.95;
   }
 
-  .bento-badge--alt {
-    background: var(--color-accent-2);
+  .figma-subtitle {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    color: #555555;
+    margin-top: 12px;
+    letter-spacing: 0.06em;
   }
 
-  /* 소셜 아이콘 버튼 (원형 글래스) */
-  .bento-icon-btn {
+  /* Section eyebrow — monospace doc style */
+  .figma-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 400;
+    color: #444444;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nb-marker {
+    color: #c8ff3c;
+    font-weight: 700;
+  }
+
+  /* Social icon buttons — square */
+  .figma-icon-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    color: var(--color-text-secondary);
+    width: 48px;
+    height: 48px;
+    border-radius: 2px;
+    background: #0e0e0e;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #888888;
     text-decoration: none;
-    transition: color 0.15s, border-color 0.15s, transform 0.15s;
+    transition: border-color 0.15s, color 0.15s;
   }
 
-  .bento-icon-btn:hover {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
-    transform: translateY(-2px);
+  .figma-icon-btn:hover {
+    border-color: #c8ff3c;
+    color: #c8ff3c;
   }
 
-  /* 프로젝트 카드 장식 패턴 */
-  .bento-proj-deco {
+  /* Card base — neo-brutalism */
+  .bento-card {
+    background: #0e0e0e;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 2px;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.6);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    position: relative;
+  }
+
+  .bento-card:hover {
+    border-color: rgba(200, 255, 60, 0.30);
+    box-shadow: 5px 5px 0 rgba(200, 255, 60, 0.06);
+    transform: translate(-1px, -1px);
+  }
+
+  /* Top accent line on card */
+  .bento-card::before {
+    content: '';
     position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--glass-border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
-    background-size: 32px 32px;
-    opacity: 0.6;
-    transition: transform 0.3s ease;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(200,255,60,0.15) 0%, transparent 60%);
+    border-radius: 2px 2px 0 0;
   }
 
-  .bento-card:hover .bento-proj-deco {
-    transform: scale(1.03);
+  /* Chips & tags */
+  .figma-exp-chip {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    color: #888888;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    letter-spacing: 0.06em;
   }
 
-  /* 라이트 모드 오버라이드 */
-  [data-theme="light"] .bento-card {
-    background: rgba(255, 255, 255, 0.80);
-    border-color: rgba(255, 255, 255, 0.7);
-    box-shadow:
-      0 8px 32px rgba(31, 38, 135, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  .figma-skill-pill {
+    color: #888888;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 5px 10px;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    white-space: nowrap;
+    letter-spacing: 0.06em;
+    transition: border-color 0.15s, color 0.15s;
   }
 
-  [data-theme="light"] .bento-card:hover {
-    border-color: rgba(22, 163, 74, 0.3);
-    box-shadow:
-      0 16px 48px rgba(31, 38, 135, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  .figma-skill-pill:hover {
+    border-color: rgba(200, 255, 60, 0.35);
+    color: #c8ff3c;
   }
 
-  [data-theme="light"] .bento-icon-btn {
-    background: rgba(255, 255, 255, 0.7);
-    border-color: rgba(0, 0, 0, 0.08);
+  /* Text link */
+  .figma-text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: #c8ff3c;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    letter-spacing: 0.08em;
+    transition: opacity 0.15s;
+  }
+
+  .figma-text-link:hover { opacity: 0.7; }
+
+  /* Arrow square */
+  .figma-arrow-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #888888;
+    flex-shrink: 0;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .bento-card:hover .figma-arrow-circle {
+    border-color: rgba(200, 255, 60, 0.35);
+    color: #c8ff3c;
+  }
+
+  /* Experience row divider */
+  .nb-exp-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    margin: 16px 0;
+  }
+
+  /* Grid */
+  .figma-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .figma-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (min-width: 1024px) {
+    .figma-grid { grid-template-columns: repeat(12, 1fr); gap: 12px; }
+    .bento-about     { grid-column: 1 / 6;  grid-row: 1; }
+    .bento-exp       { grid-column: 6 / 13; grid-row: 1; }
+    .bento-skills    { grid-column: 6 / 9;  grid-row: 2; }
+    .bento-project   { grid-column: 9 / 13; grid-row: 2; }
+    .bento-blog      { grid-column: 1 / 8;  grid-row: 3; }
+    .bento-casestudy { grid-column: 8 / 13; grid-row: 3; }
   }
 }
 
-/* 섹션 배경 mesh 그라디언트 */
+/* 섹션 배경 */
 #hero {
-  background:
-    radial-gradient(ellipse 80% 50% at 10% 20%, rgba(57, 211, 83, 0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 90% 80%, rgba(34, 197, 94, 0.04) 0%, transparent 60%);
-}
-
-[data-theme="light"] #hero {
-  background:
-    radial-gradient(ellipse 80% 50% at 10% 20%, rgba(22, 163, 74, 0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 90% 80%, rgba(34, 197, 94, 0.03) 0%, transparent 60%);
+  background: #0a0a0a;
 }
 
 @keyframes blink {
@@ -356,5 +424,94 @@ body {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@theme inline {
+  --font-heading:             var(--font-sans);
+  --font-sans:             var(--font-sans);
+  --color-sidebar-ring:             var(--sidebar-ring);
+  --color-sidebar-border:             var(--sidebar-border);
+  --color-sidebar-accent-foreground:             var(--sidebar-accent-foreground);
+  --color-sidebar-accent:             var(--sidebar-accent);
+  --color-sidebar-primary-foreground:             var(--sidebar-primary-foreground);
+  --color-sidebar-primary:             var(--sidebar-primary);
+  --color-sidebar-foreground:             var(--sidebar-foreground);
+  --color-sidebar:             var(--sidebar);
+  --color-chart-5:             var(--chart-5);
+  --color-chart-4:             var(--chart-4);
+  --color-chart-3:             var(--chart-3);
+  --color-chart-2:             var(--chart-2);
+  --color-chart-1:             var(--chart-1);
+  --color-ring:             var(--ring);
+  --color-input:             var(--input);
+  --color-border:             var(--border);
+  --color-destructive:             var(--destructive);
+  --color-accent-foreground:             var(--accent-foreground);
+  --color-accent:             var(--accent);
+  --color-muted-foreground:             var(--muted-foreground);
+  --color-muted:             var(--muted);
+  --color-secondary-foreground:             var(--secondary-foreground);
+  --color-secondary:             var(--secondary);
+  --color-primary-foreground:             var(--primary-foreground);
+  --color-primary:             var(--primary);
+  --color-popover-foreground:             var(--popover-foreground);
+  --color-popover:             var(--popover);
+  --color-card-foreground:             var(--card-foreground);
+  --color-card:             var(--card);
+  --color-foreground:             var(--foreground);
+  --color-background:             var(--background);
+  --radius-sm:             calc(var(--radius) * 0.6);
+  --radius-md:             calc(var(--radius) * 0.8);
+  --radius-lg:             var(--radius);
+  --radius-xl:             calc(var(--radius) * 1.4);
+  --radius-2xl:             calc(var(--radius) * 1.8);
+  --radius-3xl:             calc(var(--radius) * 2.2);
+  --radius-4xl:             calc(var(--radius) * 2.6);
+}
+
+.dark {
+  --background:             oklch(0.145 0 0);
+  --foreground:             oklch(0.985 0 0);
+  --card:             oklch(0.205 0 0);
+  --card-foreground:             oklch(0.985 0 0);
+  --popover:             oklch(0.205 0 0);
+  --popover-foreground:             oklch(0.985 0 0);
+  --primary:             oklch(0.922 0 0);
+  --primary-foreground:             oklch(0.205 0 0);
+  --secondary:             oklch(0.269 0 0);
+  --secondary-foreground:             oklch(0.985 0 0);
+  --muted:             oklch(0.269 0 0);
+  --muted-foreground:             oklch(0.708 0 0);
+  --accent:             oklch(0.269 0 0);
+  --accent-foreground:             oklch(0.985 0 0);
+  --destructive:             oklch(0.704 0.191 22.216);
+  --border:             oklch(1 0 0 / 10%);
+  --input:             oklch(1 0 0 / 15%);
+  --ring:             oklch(0.556 0 0);
+  --chart-1:             oklch(0.87 0 0);
+  --chart-2:             oklch(0.556 0 0);
+  --chart-3:             oklch(0.439 0 0);
+  --chart-4:             oklch(0.371 0 0);
+  --chart-5:             oklch(0.269 0 0);
+  --sidebar:             oklch(0.205 0 0);
+  --sidebar-foreground:             oklch(0.985 0 0);
+  --sidebar-primary:             oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground:             oklch(0.985 0 0);
+  --sidebar-accent:             oklch(0.269 0 0);
+  --sidebar-accent-foreground:             oklch(0.985 0 0);
+  --sidebar-border:             oklch(1 0 0 / 10%);
+  --sidebar-ring:             oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
   }
 }
