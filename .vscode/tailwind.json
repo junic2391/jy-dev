@@ -1,0 +1,30 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@variant",
+      "description": "Tailwind CSS v4: defines a custom variant selector.",
+      "references": [
+        {
+          "name": "Tailwind CSS v4 Docs",
+          "url": "https://tailwindcss.com/docs/v4-beta#defining-custom-variants"
+        }
+      ]
+    },
+    {
+      "name": "@theme",
+      "description": "Tailwind CSS v4: defines design tokens inline.",
+      "references": []
+    },
+    {
+      "name": "@utility",
+      "description": "Tailwind CSS v4: defines a custom utility.",
+      "references": []
+    },
+    {
+      "name": "@source",
+      "description": "Tailwind CSS v4: specifies a content source.",
+      "references": []
+    }
+  ]
+}
